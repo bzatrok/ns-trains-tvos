@@ -1,0 +1,59 @@
+# Sample/Reference Code
+_sample/
+
+# Node.js / CLI
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+build/
+.npm
+.eslintcache
+*.tsbuildinfo
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+*.cache
+*.swp
+*.swo
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+.vs/
+.vscode/settings.json
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.env
+appsettings.Development.json
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+.vscode/
+.vs/
+
+# Docker
+docker-compose.override.yml
+
+# Build artifacts
+*.dll
+*.exe
+*.pdb
+*.cache
+*.tmp

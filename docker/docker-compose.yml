@@ -1,0 +1,45 @@
+services:
+  api:
+    build:
+      context: ../api
+      dockerfile: Dockerfile
+    container_name: amberglass-api
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - NsApi__SubscriptionKey=${NS_API_KEY}
+      - NsApi__BaseUrl=https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/
+      - NsApi__CacheDurationSeconds=45
+      - NsApi__TimeoutSeconds=10
+      - Redis__ConnectionString=redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - amberglass-network
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: amberglass-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - amberglass-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+networks:
+  amberglass-network:
+    driver: bridge
+
+volumes:
+  redis-data:
+    driver: local
