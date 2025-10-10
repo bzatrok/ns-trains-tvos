@@ -1,7 +1,30 @@
 import { useState, useCallback } from 'react';
-import { Station, DeparturesResponse } from '../types/departure.js';
+import { Station, DeparturesResponse, Departure } from '../types/departure.js';
 
-const API_BASE = process.env.API_URL || 'http://localhost:5000';
+// Load environment variables
+const NS_API_KEY = process.env.NS_API_KEY || '';
+const NS_API_BASE = process.env.NS_API_BASE_URL || 'https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2';
+
+// Helper to transform NS API snake_case to camelCase
+function transformDeparture(nsData: any): Departure {
+  return {
+    cancelled: nsData.cancelled || false,
+    company: nsData.product?.operatorName || nsData.company || 'NS',
+    delay: nsData.departureDelayInMinutes || 0,
+    departureTime: nsData.plannedDateTime || nsData.actualDateTime || '',
+    destinationActual: nsData.direction || nsData.destination_actual || '',
+    destinationActualCodes: nsData.routeStations?.map((s: any) => s.uicCode) || [],
+    destinationPlanned: nsData.direction || nsData.destination_planned || '',
+    platformActual: nsData.actualTrack || nsData.plannedTrack || '',
+    platformChanged: nsData.actualTrack !== nsData.plannedTrack,
+    platformPlanned: nsData.plannedTrack || '',
+    serviceNumber: nsData.product?.number || nsData.trainNumber?.toString() || '',
+    type: nsData.product?.longCategoryName || nsData.trainCategory || 'Intercity',
+    typeCode: nsData.product?.categoryCode || nsData.type_code || 'IC',
+    remarks: nsData.messages?.map((m: any) => m.message) || [],
+    via: nsData.routeStations?.slice(1, -1).map((s: any) => s.mediumName).join(', ') || ''
+  };
+}
 
 export function useNSApi() {
   const [loading, setLoading] = useState(false);
@@ -11,10 +34,23 @@ export function useNSApi() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${API_BASE}/api/stations`);
-      if (!response.ok) throw new Error(`API error: ${response.status}`);
-      const data = await response.json();
-      return data;
+      const response = await fetch(`${NS_API_BASE}/stations`, {
+        headers: {
+          'Ocp-Apim-Subscription-Key': NS_API_KEY
+        }
+      });
+      if (!response.ok) throw new Error(`NS API error: ${response.status}`);
+      const data = await response.json() as any;
+
+      // Transform NS API response to our Station interface
+      const stations: Station[] = data.payload?.map((s: any) => ({
+        code: s.code,
+        name: s.namen?.lang || s.name,
+        country: s.land || s.country || 'NL',
+        uicCode: s.UICCode || s.uicCode
+      })) || [];
+
+      return stations;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error';
       setError(errorMessage);
@@ -28,10 +64,21 @@ export function useNSApi() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${API_BASE}/api/departures?station=${stationCode}`);
-      if (!response.ok) throw new Error(`API error: ${response.status}`);
-      const data = await response.json();
-      return data;
+      const response = await fetch(`${NS_API_BASE}/departures?station=${stationCode}`, {
+        headers: {
+          'Ocp-Apim-Subscription-Key': NS_API_KEY
+        }
+      });
+      if (!response.ok) throw new Error(`NS API error: ${response.status}`);
+      const data = await response.json() as any;
+
+      // Transform NS API response to our DeparturesResponse interface
+      const departures: Departure[] = (data.payload?.departures || []).map(transformDeparture);
+
+      return {
+        departures,
+        status: 'success'
+      };
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error';
       setError(errorMessage);
