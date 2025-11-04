@@ -5,12 +5,23 @@ import { Station, DeparturesResponse, Departure } from '../types/departure.js';
 const NS_API_KEY = process.env.NS_API_KEY || '';
 const NS_API_BASE = process.env.NS_API_BASE_URL || 'https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2';
 
+// Cache for API results (module-level to persist across component re-renders)
+let stationsCache: Station[] | null = null;
+
 // Helper to transform NS API snake_case to camelCase
 function transformDeparture(nsData: any): Departure {
+  // Calculate delay in minutes by comparing planned vs actual departure time
+  let delayMinutes = 0;
+  if (nsData.plannedDateTime && nsData.actualDateTime) {
+    const planned = new Date(nsData.plannedDateTime);
+    const actual = new Date(nsData.actualDateTime);
+    delayMinutes = Math.round((actual.getTime() - planned.getTime()) / (1000 * 60));
+  }
+
   return {
     cancelled: nsData.cancelled || false,
     company: nsData.product?.operatorName || nsData.company || 'NS',
-    delay: nsData.departureDelayInMinutes || 0,
+    delay: delayMinutes,
     departureTime: nsData.plannedDateTime || nsData.actualDateTime || '',
     destinationActual: nsData.direction || nsData.destination_actual || '',
     destinationActualCodes: nsData.routeStations?.map((s: any) => s.uicCode) || [],
@@ -31,6 +42,11 @@ export function useNSApi() {
   const [error, setError] = useState<string | null>(null);
 
   const fetchStations = useCallback(async (): Promise<Station[] | null> => {
+    // Return cached stations if available
+    if (stationsCache) {
+      return stationsCache;
+    }
+
     setLoading(true);
     setError(null);
     try {
@@ -49,6 +65,9 @@ export function useNSApi() {
         country: s.land || s.country || 'NL',
         uicCode: s.UICCode || s.uicCode
       })) || [];
+
+      // Cache the results
+      stationsCache = stations;
 
       return stations;
     } catch (err) {

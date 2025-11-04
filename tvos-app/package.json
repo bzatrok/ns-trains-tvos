@@ -1,0 +1,24 @@
+{
+  "name": "nstrains-tvos",
+  "version": "0.1.0",
+  "description": "NS Train Departure Board for Apple TV",
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start",
+    "ios": "expo run:ios",
+    "tvos": "expo run:ios --device",
+    "tvos:simulator": "expo run:ios --simulator 'Apple TV'",
+    "prebuild": "expo prebuild --platform ios --clean",
+    "web": "expo start --web",
+    "android": "expo run:android"
+  },
+  "dependencies": {
+    "@react-native-tvos/config-tv": "^0.1.4",
+    "expo": "~54.0.22",
+    "expo-dev-client": "^6.0.16",
+    "expo-status-bar": "~3.0.8",
+    "react": "19.1.0",
+    "react-native": "npm:react-native-tvos@latest"
+  },
+  "private": true
+}
