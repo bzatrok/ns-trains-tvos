@@ -14,10 +14,16 @@ struct NSTrainsApp: App {
 struct ContentView: View {
     @State private var selectedStation: Station?
     @State private var showStationSelector = false
+    @State private var showSplash = true
 
     var body: some View {
         ZStack {
-            if showStationSelector {
+            if showSplash {
+                SplashView {
+                    showSplash = false
+                }
+                .transition(.opacity)
+            } else if showStationSelector {
                 StationSelectorView { station in
                     // Save selected station
                     UserDefaults.standard.set(station.code, forKey: "lastSelectedStationCode")

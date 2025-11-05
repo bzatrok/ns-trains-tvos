@@ -9,11 +9,15 @@ targets:
     type: application
     platform: tvOS
     sources:
-      - NSTrains-tvOS
+      - App
+      - Views
+      - Models
+      - Services
+      - Utilities
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.amberglass.nstrains.tvos
-        INFOPLIST_FILE: NSTrains-tvOS/Info.plist
+        INFOPLIST_FILE: Info.plist
         DEVELOPMENT_TEAM: ""
         SWIFT_VERSION: "5.0"
         TARGETED_DEVICE_FAMILY: "3"
