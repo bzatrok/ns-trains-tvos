@@ -1,6 +1,0 @@
-@Amberglass.API_HostAddress = http://localhost:5181
-
-GET {{Amberglass.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

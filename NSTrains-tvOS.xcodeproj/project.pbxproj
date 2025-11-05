@@ -1,0 +1,353 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 63;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		41D0FD0DCAF1563DF349C5BB /* DepartureBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658AE71A75B58ABE93E4F488 /* DepartureBoardView.swift */; };
+		4E4A72FCA8E4B6E7F083A61D /* Departure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F83276CC0EF41A404424C05 /* Departure.swift */; };
+		53ADB5D623D517566C3E9EE0 /* StationSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779466EFF215F6209A59B79 /* StationSelectorView.swift */; };
+		5A8458F3636636A799409988 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415C28825F5C8C1D34AD277A /* WelcomeView.swift */; };
+		7CF0F01C56C201DDC0C4FE70 /* NSTrainsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5680CFD7CDB1724A90625A2F /* NSTrainsApp.swift */; };
+		DE386B3D63D63CE1198EB4FA /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382DD4DE50F3855D1A1CF84 /* Station.swift */; };
+		EA1A665DF917D9974172BCC9 /* NSAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D07D3AE088069A63C04665E /* NSAPIService.swift */; };
+		FC39363994EF9016C92EAE0A /* NSColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15059287BFE82358E1BCA907 /* NSColors.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0D07D3AE088069A63C04665E /* NSAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAPIService.swift; sourceTree = "<group>"; };
+		15059287BFE82358E1BCA907 /* NSColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColors.swift; sourceTree = "<group>"; };
+		2A86CC111253D9E22542F138 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		415C28825F5C8C1D34AD277A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		5680CFD7CDB1724A90625A2F /* NSTrainsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTrainsApp.swift; sourceTree = "<group>"; };
+		658AE71A75B58ABE93E4F488 /* DepartureBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartureBoardView.swift; sourceTree = "<group>"; };
+		9382DD4DE50F3855D1A1CF84 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
+		9F83276CC0EF41A404424C05 /* Departure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Departure.swift; sourceTree = "<group>"; };
+		AF2947024ADBBF0413D6B342 /* NSTrains-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NSTrains-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F779466EFF215F6209A59B79 /* StationSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSelectorView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		14CB52E6661B98CEBE3483FA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AF2947024ADBBF0413D6B342 /* NSTrains-tvOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1B8103609DE7E2013FD5753E /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5680CFD7CDB1724A90625A2F /* NSTrainsApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		351B96846933E66F2AAE9DC2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0D07D3AE088069A63C04665E /* NSAPIService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		880D83346C4A197EB522DCEC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9F83276CC0EF41A404424C05 /* Departure.swift */,
+				9382DD4DE50F3855D1A1CF84 /* Station.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A934F695EA1D5920F9375EFD /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				15059287BFE82358E1BCA907 /* NSColors.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		AD05B2176CFA314A9175AD2C /* NSTrains-tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				2A86CC111253D9E22542F138 /* Info.plist */,
+				1B8103609DE7E2013FD5753E /* App */,
+				880D83346C4A197EB522DCEC /* Models */,
+				351B96846933E66F2AAE9DC2 /* Services */,
+				A934F695EA1D5920F9375EFD /* Utilities */,
+				FCE0B4DF833D027869D36C5C /* Views */,
+			);
+			path = "NSTrains-tvOS";
+			sourceTree = "<group>";
+		};
+		B4C5CF8B0CD4992D6837BDA6 = {
+			isa = PBXGroup;
+			children = (
+				AD05B2176CFA314A9175AD2C /* NSTrains-tvOS */,
+				14CB52E6661B98CEBE3483FA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FCE0B4DF833D027869D36C5C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				658AE71A75B58ABE93E4F488 /* DepartureBoardView.swift */,
+				F779466EFF215F6209A59B79 /* StationSelectorView.swift */,
+				415C28825F5C8C1D34AD277A /* WelcomeView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BE5F3BC2A92C7F65EF0EC9EC /* NSTrains-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 097CF32C9C16406E46915D79 /* Build configuration list for PBXNativeTarget "NSTrains-tvOS" */;
+			buildPhases = (
+				0EA876D26FDD3E30B48E38D8 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "NSTrains-tvOS";
+			packageProductDependencies = (
+			);
+			productName = "NSTrains-tvOS";
+			productReference = AF2947024ADBBF0413D6B342 /* NSTrains-tvOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3897CE349C6EC6155940124F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+			};
+			buildConfigurationList = DAFC422C61D377B2DBF6929B /* Build configuration list for PBXProject "NSTrains-tvOS" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = B4C5CF8B0CD4992D6837BDA6;
+			minimizedProjectReferenceProxies = 1;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BE5F3BC2A92C7F65EF0EC9EC /* NSTrains-tvOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0EA876D26FDD3E30B48E38D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E4A72FCA8E4B6E7F083A61D /* Departure.swift in Sources */,
+				41D0FD0DCAF1563DF349C5BB /* DepartureBoardView.swift in Sources */,
+				EA1A665DF917D9974172BCC9 /* NSAPIService.swift in Sources */,
+				FC39363994EF9016C92EAE0A /* NSColors.swift in Sources */,
+				7CF0F01C56C201DDC0C4FE70 /* NSTrainsApp.swift in Sources */,
+				DE386B3D63D63CE1198EB4FA /* Station.swift in Sources */,
+				53ADB5D623D517566C3E9EE0 /* StationSelectorView.swift in Sources */,
+				5A8458F3636636A799409988 /* WelcomeView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		65D889B570C4820B8EC591D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Release;
+		};
+		750CC7B08F7DDE740C9AA599 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Debug;
+		};
+		873EF40891AA4F70BE188904 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = BU44GWREFM;
+				INFOPLIST_FILE = "NSTrains-tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.amberglass.nstrains.tvos;
+				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Debug;
+		};
+		CFB04EF64ABBF09828F94879 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = BU44GWREFM;
+				INFOPLIST_FILE = "NSTrains-tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.amberglass.nstrains.tvos;
+				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		097CF32C9C16406E46915D79 /* Build configuration list for PBXNativeTarget "NSTrains-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				873EF40891AA4F70BE188904 /* Debug */,
+				CFB04EF64ABBF09828F94879 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DAFC422C61D377B2DBF6929B /* Build configuration list for PBXProject "NSTrains-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				750CC7B08F7DDE740C9AA599 /* Debug */,
+				65D889B570C4820B8EC591D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3897CE349C6EC6155940124F /* Project object */;
+}

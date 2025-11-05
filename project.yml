@@ -1,0 +1,24 @@
+name: NSTrains-tvOS
+options:
+  bundleIdPrefix: com.amberglass
+  deploymentTarget:
+    tvOS: "17.0"
+  developmentLanguage: en
+targets:
+  NSTrains-tvOS:
+    type: application
+    platform: tvOS
+    sources:
+      - NSTrains-tvOS
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.amberglass.nstrains.tvos
+        INFOPLIST_FILE: NSTrains-tvOS/Info.plist
+        DEVELOPMENT_TEAM: ""
+        SWIFT_VERSION: "5.0"
+        TARGETED_DEVICE_FAMILY: "3"
+      configs:
+        Debug:
+          SWIFT_OPTIMIZATION_LEVEL: "-Onone"
+        Release:
+          SWIFT_OPTIMIZATION_LEVEL: "-O"
