@@ -4,9 +4,17 @@ class NSAPIService {
     static let shared = NSAPIService()
 
     private let baseURL = "https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2"
-    private let apiKey = "e221602026d94edfb75afbf75d256455" // Public API key from NS portal
+    // API key must be set via environment variable NS_API_KEY
+    // Get your free API key at: https://apiportal.ns.nl
+    private let apiKey: String
 
-    private init() {}
+    private init() {
+        // Read API key from environment variable
+        guard let key = ProcessInfo.processInfo.environment["NS_API_KEY"], !key.isEmpty else {
+            fatalError("NS_API_KEY environment variable is not set. Get your free API key at https://apiportal.ns.nl")
+        }
+        self.apiKey = key
+    }
 
     // MARK: - Fetch Stations
 

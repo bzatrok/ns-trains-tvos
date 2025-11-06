@@ -48,6 +48,14 @@ Thumbs.db
 .vscode/
 .vs/
 
+# Xcode
+*.xcuserstate
+**/xcuserdata/
+*.xcworkspace/xcuserdata/
+
+# Claude settings with sensitive data
+.claude/settings.local.json
+
 # Docker
 docker-compose.override.yml
 

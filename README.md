@@ -26,6 +26,33 @@ This is a **native Swift/SwiftUI tvOS application** - no React Native, no Expo, 
 - **macOS** with Apple Silicon or Intel
 - **Apple TV** (physical device or simulator)
 - **Swift 5.0+**
+- **NS API Key** (free, instructions below)
+
+## Getting Your NS API Key
+
+This app uses the Nederlandse Spoorwegen (NS) public API to fetch real-time train departure data. You need a free API key to use the app.
+
+### Steps to Get Your Free API Key:
+
+1. Visit the **NS API Portal**: https://apiportal.ns.nl
+2. Create a free account (if you don't have one)
+3. Subscribe to the **Reisinformatie API** (Travel Information API)
+4. Copy your **Subscription Key** (Ocp-Apim-Subscription-Key)
+
+### Configure the API Key
+
+You need to set the API key as an environment variable in Xcode:
+
+1. Open `NSTrains-tvOS.xcodeproj` in Xcode
+2. Select the **NSTrains-tvOS** scheme (top bar, next to device selector)
+3. Click **Edit Scheme** (or press `Cmd+<`)
+4. Select **Run** → **Arguments** tab
+5. Under **Environment Variables**, add:
+   - **Name**: `NS_API_KEY`
+   - **Value**: `your-api-key-here`
+6. Click **Close**
+
+The app will now use your API key to fetch live departure data from the NS API.
 
 ## Project Setup
 
@@ -40,7 +67,7 @@ XcodeGen generates the Xcode project from `project.yml`, so you never have to ma
 ### Generate Xcode Project
 
 ```bash
-cd /Users/bzatrok/play/Amberglass.NSTrains/NSTrains-tvOS
+cd NSTrains-tvOS
 xcodegen generate
 ```
 

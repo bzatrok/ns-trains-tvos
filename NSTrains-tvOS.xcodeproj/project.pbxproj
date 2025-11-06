@@ -293,12 +293,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BU44GWREFM;
 				INFOPLIST_FILE = "NSTrains-tvOS/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Departures;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amberglass.nstrains.tvos;
 				SDKROOT = appletvos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -312,12 +316,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BU44GWREFM;
 				INFOPLIST_FILE = "NSTrains-tvOS/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Departures;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amberglass.nstrains.tvos;
 				SDKROOT = appletvos;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
