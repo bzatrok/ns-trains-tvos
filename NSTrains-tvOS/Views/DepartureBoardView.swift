@@ -85,7 +85,7 @@ struct DepartureBoardView: View {
                 .padding(.bottom, 30)
 
                 // Main content: Departures (left 2/3) + Map (right 1/3)
-                HStack(spacing: 0) {
+                HStack(spacing: 20) {
                     // Left side: Departures list (2/3 width)
                     VStack(spacing: 0) {
                         if viewModel.isLoading {
@@ -130,8 +130,8 @@ struct DepartureBoardView: View {
                             }
                             .font(.system(size: 24, weight: .bold))
                             .foregroundColor(.nsYellow)
-                            .padding(.horizontal, 30)
-                            .padding(.vertical, 20)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 16)
                             .background(Color.white.opacity(0.1))
 
                             // Departures
@@ -141,7 +141,7 @@ struct DepartureBoardView: View {
                                         DepartureRow(departure: departure)
                                     }
                                 }
-                                .padding(.horizontal, 30)
+                                .padding(.horizontal, 8)
                             }
                         }
                     }
@@ -153,6 +153,7 @@ struct DepartureBoardView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .layoutPriority(1)
                 }
+                .padding(.horizontal, 30)
 
                 // Footer
                 if !viewModel.isLoading {
@@ -259,8 +260,8 @@ struct DepartureRow: View {
                 .foregroundColor(statusColor)
                 .frame(width: 140, alignment: .center)
         }
-        .padding(.vertical, 18)
-        .padding(.horizontal, 24)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 14)
         .background(
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.white.opacity(0.05))
