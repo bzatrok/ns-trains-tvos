@@ -1,4 +1,5 @@
 import Foundation
+import MapKit
 
 struct Station: Decodable, Identifiable, Hashable {
     let id: String
@@ -6,12 +7,21 @@ struct Station: Decodable, Identifiable, Hashable {
     let name: String
     let country: String
     let uicCode: String?
+    let latitude: Double
+    let longitude: Double
+
+    // Computed property for MapKit
+    var coordinate: CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
 
     enum CodingKeys: String, CodingKey {
         case code
         case name = "namen"
         case country = "land"
         case uicCode = "UICCode"
+        case latitude = "lat"
+        case longitude = "lng"
     }
 
     init(from decoder: Decoder) throws {
@@ -28,6 +38,10 @@ struct Station: Decodable, Identifiable, Hashable {
 
         self.country = try container.decode(String.self, forKey: .country)
         self.uicCode = try? container.decode(String.self, forKey: .uicCode)
+
+        // Decode coordinates, defaulting to center of Netherlands if not available
+        self.latitude = try container.decodeIfPresent(Double.self, forKey: .latitude) ?? 52.2
+        self.longitude = try container.decodeIfPresent(Double.self, forKey: .longitude) ?? 5.5
     }
 
     // Hashable conformance

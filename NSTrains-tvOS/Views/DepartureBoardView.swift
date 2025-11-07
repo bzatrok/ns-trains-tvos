@@ -84,6 +84,10 @@ struct DepartureBoardView: View {
                 .padding(.horizontal, 30)
                 .padding(.bottom, 30)
 
+                // Train Map
+                TrainMapCompactView(station: station)
+                    .padding(.bottom, 30)
+
                 // Departures list
                 if viewModel.isLoading {
                     Spacer()
