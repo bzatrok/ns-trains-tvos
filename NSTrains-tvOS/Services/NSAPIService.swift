@@ -93,11 +93,26 @@ class NSAPIService {
         }
 
         guard httpResponse.statusCode == 200 else {
+            // Log response body for debugging
+            if let errorBody = String(data: data, encoding: .utf8) {
+                print("❌ Virtual Train API Error (\(httpResponse.statusCode)): \(errorBody)")
+            }
             throw NSAPIError.httpError(statusCode: httpResponse.statusCode)
         }
 
-        let trainsResponse = try JSONDecoder().decode(TrainsResponse.self, from: data)
-        return trainsResponse.treinen
+        // Debug: Print raw response to understand structure
+        if let jsonString = String(data: data, encoding: .utf8) {
+            print("🚂 Virtual Train API Response: \(jsonString.prefix(500))")
+        }
+
+        do {
+            let trainsResponse = try JSONDecoder().decode(TrainsResponse.self, from: data)
+            print("✅ Decoded \(trainsResponse.treinen.count) trains successfully")
+            return trainsResponse.treinen
+        } catch {
+            print("❌ Decoding error: \(error)")
+            throw NSAPIError.decodingError(error)
+        }
     }
 }
 
