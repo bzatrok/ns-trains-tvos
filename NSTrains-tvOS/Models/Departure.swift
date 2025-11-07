@@ -20,6 +20,7 @@ struct Departure: Decodable, Identifiable {
     enum CodingKeys: String, CodingKey {
         case cancelled
         case direction
+        case origin
         case plannedDateTime
         case actualDateTime
         case actualTrack
@@ -34,7 +35,15 @@ struct Departure: Decodable, Identifiable {
 
         self.id = UUID()
         self.cancelled = try container.decodeIfPresent(Bool.self, forKey: .cancelled) ?? false
-        self.destination = try container.decode(String.self, forKey: .direction)
+
+        // Handle both departures (direction) and arrivals (origin)
+        if let direction = try? container.decode(String.self, forKey: .direction) {
+            self.destination = direction
+        } else if let origin = try? container.decode(String.self, forKey: .origin) {
+            self.destination = origin
+        } else {
+            self.destination = "Unknown"
+        }
 
         // Parse date
         let plannedDateString = try container.decode(String.self, forKey: .plannedDateTime)
@@ -97,6 +106,14 @@ struct DeparturesResponse: Decodable {
 
 struct DeparturesPayload: Decodable {
     let departures: [Departure]
+}
+
+struct ArrivalsResponse: Decodable {
+    let payload: ArrivalsPayload
+}
+
+struct ArrivalsPayload: Decodable {
+    let arrivals: [Departure]
 }
 
 // Helper to decode Any types from JSON

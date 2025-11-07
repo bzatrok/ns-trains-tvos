@@ -21,45 +21,33 @@ struct DepartureBoardView: View {
             VStack(spacing: 0) {
                 // Header
                 HStack(alignment: .center) {
-                    // Back button (if provided)
-                    if let onBack = onBack {
-                        Button(action: onBack) {
-                            Image(systemName: "chevron.left")
-                                .font(.system(size: 32, weight: .semibold))
-                                .foregroundColor(.nsYellow)
-                        }
-                        .buttonStyle(.plain)
-                    }
-
                     // Departures/Arrivals Toggle
                     HStack(spacing: 16) {
                         Button(action: {
                             showingDepartures = true
-                            viewModel.showingDepartures = true
                         }) {
                             Text("DEPARTURES")
                                 .font(.system(size: 28, weight: .semibold))
                                 .foregroundColor(showingDepartures ? .nsBlue : .nsYellow)
                                 .padding(.horizontal, 16)
                                 .padding(.vertical, 10)
-                                .background(showingDepartures ? Color.nsYellow : Color.clear)
-                                .cornerRadius(8)
                         }
-                        .buttonStyle(.plain)
+                        .background(showingDepartures ? Color.nsYellow : Color.clear)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .buttonStyle(PlainButtonStyle())
 
                         Button(action: {
                             showingDepartures = false
-                            viewModel.showingDepartures = false
                         }) {
                             Text("ARRIVALS")
                                 .font(.system(size: 28, weight: .semibold))
                                 .foregroundColor(!showingDepartures ? .nsBlue : .nsYellow)
                                 .padding(.horizontal, 16)
                                 .padding(.vertical, 10)
-                                .background(!showingDepartures ? Color.nsYellow : Color.clear)
-                                .cornerRadius(8)
                         }
-                        .buttonStyle(.plain)
+                        .background(!showingDepartures ? Color.nsYellow : Color.clear)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .buttonStyle(PlainButtonStyle())
                     }
 
                     Spacer()

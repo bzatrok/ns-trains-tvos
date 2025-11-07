@@ -106,10 +106,6 @@ class TrainAnnotationView: MKAnnotationView {
             .withTintColor(.nsYellow, renderingMode: .alwaysOriginal)
         trainIconView.image = image
 
-        // Rotate icon based on train direction (richting in degrees)
-        let rotationAngle = train.direction * .pi / 180.0
-        trainIconView.transform = CGAffineTransform(rotationAngle: rotationAngle)
-
         // Set type label
         typeLabel.text = train.typeCode
         typeLabel.sizeToFit()

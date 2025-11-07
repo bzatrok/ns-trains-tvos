@@ -82,12 +82,26 @@ class NSAPIService {
         }
 
         guard httpResponse.statusCode == 200 else {
+            // Log response body for debugging
+            if let errorBody = String(data: data, encoding: .utf8) {
+                print("❌ Arrivals API Error (\(httpResponse.statusCode)): \(errorBody)")
+            }
             throw NSAPIError.httpError(statusCode: httpResponse.statusCode)
         }
 
-        // Arrivals use the same response structure as departures
-        let arrivalsResponse = try JSONDecoder().decode(DeparturesResponse.self, from: data)
-        return arrivalsResponse.payload.departures
+        // Debug: Print raw response to understand structure
+        if let jsonString = String(data: data, encoding: .utf8) {
+            print("🚂 Arrivals API Response: \(jsonString.prefix(500))")
+        }
+
+        do {
+            let arrivalsResponse = try JSONDecoder().decode(ArrivalsResponse.self, from: data)
+            print("✅ Decoded \(arrivalsResponse.payload.arrivals.count) arrivals successfully")
+            return arrivalsResponse.payload.arrivals
+        } catch {
+            print("❌ Arrivals Decoding error: \(error)")
+            throw NSAPIError.decodingError(error)
+        }
     }
 
     // MARK: - Fetch Trains (Virtual Train API)
