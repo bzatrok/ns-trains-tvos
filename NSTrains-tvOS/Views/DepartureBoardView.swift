@@ -84,66 +84,74 @@ struct DepartureBoardView: View {
                 .padding(.horizontal, 30)
                 .padding(.bottom, 30)
 
-                // Train Map
-                TrainMapCompactView(station: station)
-                    .padding(.bottom, 30)
-
-                // Departures list
-                if viewModel.isLoading {
-                    Spacer()
-                    ProgressView()
-                        .scaleEffect(2)
-                        .tint(.nsYellow)
-                    Spacer()
-                } else if let error = viewModel.errorMessage {
-                    Spacer()
-                    VStack(spacing: 20) {
-                        Image(systemName: "exclamationmark.triangle")
-                            .font(.system(size: 64))
+                // Main content: Departures (left 2/3) + Map (right 1/3)
+                HStack(spacing: 0) {
+                    // Left side: Departures list (2/3 width)
+                    VStack(spacing: 0) {
+                        if viewModel.isLoading {
+                            Spacer()
+                            ProgressView()
+                                .scaleEffect(2)
+                                .tint(.nsYellow)
+                            Spacer()
+                        } else if let error = viewModel.errorMessage {
+                            Spacer()
+                            VStack(spacing: 20) {
+                                Image(systemName: "exclamationmark.triangle")
+                                    .font(.system(size: 64))
+                                    .foregroundColor(.nsYellow)
+                                Text("Error Loading Departures")
+                                    .font(.system(size: 42, weight: .semibold))
+                                    .foregroundColor(.white)
+                                Text(error)
+                                    .font(.system(size: 28))
+                                    .foregroundColor(.white.opacity(0.8))
+                                    .multilineTextAlignment(.center)
+                            }
+                            .padding(60)
+                            Spacer()
+                        } else {
+                            // Table header
+                            HStack(spacing: 20) {
+                                Text("TIME")
+                                    .frame(width: 120, alignment: .leading)
+                                Text("TRAIN")
+                                    .frame(width: 100, alignment: .leading)
+                                Text("TYPE")
+                                    .frame(width: 160, alignment: .leading)
+                                Text("DESTINATION")
+                                    .frame(minWidth: 300, alignment: .leading)
+                                Text("PLATFORM")
+                                    .frame(width: 140, alignment: .center)
+                                Text("DELAY")
+                                    .frame(width: 100, alignment: .center)
+                                Text("STATUS")
+                                    .frame(width: 140, alignment: .center)
+                            }
+                            .font(.system(size: 24, weight: .bold))
                             .foregroundColor(.nsYellow)
-                        Text("Error Loading Departures")
-                            .font(.system(size: 42, weight: .semibold))
-                            .foregroundColor(.white)
-                        Text(error)
-                            .font(.system(size: 28))
-                            .foregroundColor(.white.opacity(0.8))
-                            .multilineTextAlignment(.center)
-                    }
-                    .padding(60)
-                    Spacer()
-                } else {
-                    // Table header
-                    HStack(spacing: 30) {
-                        Text("TIME")
-                            .frame(width: 140, alignment: .leading)
-                        Text("TRAIN")
-                            .frame(width: 120, alignment: .leading)
-                        Text("TYPE")
-                            .frame(width: 200, alignment: .leading)
-                        Text("DESTINATION")
-                            .frame(minWidth: 400, alignment: .leading)
-                        Text("PLATFORM")
-                            .frame(width: 180, alignment: .center)
-                        Text("DELAY")
-                            .frame(width: 120, alignment: .center)
-                        Text("STATUS")
-                            .frame(width: 160, alignment: .center)
-                    }
-                    .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(.nsYellow)
-                    .padding(.horizontal, 30)
-                    .padding(.vertical, 20)
-                    .background(Color.white.opacity(0.1))
+                            .padding(.horizontal, 30)
+                            .padding(.vertical, 20)
+                            .background(Color.white.opacity(0.1))
 
-                    // Departures
-                    ScrollView {
-                        VStack(spacing: 2) {
-                            ForEach(viewModel.departures) { departure in
-                                DepartureRow(departure: departure)
+                            // Departures
+                            ScrollView {
+                                VStack(spacing: 2) {
+                                    ForEach(viewModel.departures) { departure in
+                                        DepartureRow(departure: departure)
+                                    }
+                                }
+                                .padding(.horizontal, 30)
                             }
                         }
-                        .padding(.horizontal, 30)
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .layoutPriority(2)
+
+                    // Right side: Train Map (1/3 width)
+                    TrainMapCompactView(station: station)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .layoutPriority(1)
                 }
 
                 // Footer
@@ -192,48 +200,48 @@ struct DepartureRow: View {
     }
 
     var body: some View {
-        HStack(spacing: 30) {
+        HStack(spacing: 20) {
             // Time
             Text(timeString)
-                .font(.system(size: 36, weight: .semibold))
-                .foregroundColor(.white)
-                .frame(width: 140, alignment: .leading)
-
-            // Train
-            Text(departure.trainNumber)
-                .font(.system(size: 32))
+                .font(.system(size: 30, weight: .semibold))
                 .foregroundColor(.white)
                 .frame(width: 120, alignment: .leading)
 
+            // Train
+            Text(departure.trainNumber)
+                .font(.system(size: 26))
+                .foregroundColor(.white)
+                .frame(width: 100, alignment: .leading)
+
             // Type
             Text(departure.trainType)
-                .font(.system(size: 32))
+                .font(.system(size: 26))
                 .foregroundColor(.white)
-                .frame(width: 200, alignment: .leading)
+                .frame(width: 160, alignment: .leading)
                 .lineLimit(1)
 
             // Destination
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 2) {
                 Text(departure.destination)
-                    .font(.system(size: 34, weight: .medium))
+                    .font(.system(size: 28, weight: .medium))
                     .foregroundColor(.white)
                     .lineLimit(1)
 
                 if !departure.via.isEmpty {
                     Text("via \(departure.via)")
-                        .font(.system(size: 26))
+                        .font(.system(size: 22))
                         .foregroundColor(.white.opacity(0.6))
                         .lineLimit(1)
                 }
             }
-            .frame(minWidth: 400, alignment: .leading)
+            .frame(minWidth: 300, alignment: .leading)
 
             // Platform
             Text(departure.platform)
-                .font(.system(size: 36, weight: .bold))
+                .font(.system(size: 30, weight: .bold))
                 .foregroundColor(departure.platformChanged ? .nsYellow : .white)
-                .frame(width: 180, alignment: .center)
-                .padding(.vertical, 8)
+                .frame(width: 140, alignment: .center)
+                .padding(.vertical, 6)
                 .background(
                     RoundedRectangle(cornerRadius: 8)
                         .fill(departure.platformChanged ? Color.nsYellow.opacity(0.2) : Color.clear)
@@ -241,15 +249,15 @@ struct DepartureRow: View {
 
             // Delay
             Text(departure.delay > 0 ? "+\(departure.delay)" : "-")
-                .font(.system(size: 32, weight: .semibold))
+                .font(.system(size: 26, weight: .semibold))
                 .foregroundColor(departure.delay > 0 ? .nsYellow : .white.opacity(0.5))
-                .frame(width: 120, alignment: .center)
+                .frame(width: 100, alignment: .center)
 
             // Status
             Text(statusText)
-                .font(.system(size: 28, weight: .bold))
+                .font(.system(size: 24, weight: .bold))
                 .foregroundColor(statusColor)
-                .frame(width: 160, alignment: .center)
+                .frame(width: 140, alignment: .center)
         }
         .padding(.vertical, 18)
         .padding(.horizontal, 24)

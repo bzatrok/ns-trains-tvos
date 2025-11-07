@@ -15,49 +15,50 @@ struct TrainMapCompactView: View {
             // Map header
             HStack {
                 Text("NEARBY TRAINS")
-                    .font(.system(size: 28, weight: .bold))
+                    .font(.system(size: 24, weight: .bold))
                     .foregroundColor(.nsYellow)
 
                 Spacer()
 
                 if viewModel.isRefreshing {
                     ProgressView()
+                        .scaleEffect(0.8)
                         .tint(.nsYellow)
                 } else {
                     Text(viewModel.trainCount)
-                        .font(.system(size: 24, weight: .semibold))
+                        .font(.system(size: 20, weight: .semibold))
                         .foregroundColor(.white)
                 }
             }
-            .padding(.horizontal, 40)
-            .padding(.vertical, 20)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 16)
             .background(Color.nsBlue.opacity(0.8))
 
             // Map container
             ZStack {
                 if viewModel.isLoading {
                     // Loading state
-                    VStack(spacing: 20) {
+                    VStack(spacing: 16) {
                         ProgressView()
                             .tint(.nsYellow)
                         Text("Loading trains...")
-                            .font(.system(size: 24, weight: .medium))
+                            .font(.system(size: 20, weight: .medium))
                             .foregroundColor(.white)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color.nsBlue.opacity(0.3))
                 } else if let errorMessage = viewModel.errorMessage {
                     // Error state
-                    VStack(spacing: 20) {
+                    VStack(spacing: 16) {
                         Image(systemName: "exclamationmark.triangle")
-                            .font(.system(size: 48))
+                            .font(.system(size: 40))
                             .foregroundColor(.nsYellow)
                         Text(errorMessage)
-                            .font(.system(size: 24, weight: .medium))
+                            .font(.system(size: 18, weight: .medium))
                             .foregroundColor(.white)
                             .multilineTextAlignment(.center)
                     }
-                    .padding(40)
+                    .padding(20)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color.nsBlue.opacity(0.3))
                 } else {
@@ -68,11 +69,9 @@ struct TrainMapCompactView: View {
                     )
                 }
             }
-            .frame(height: 500)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .background(Color.black.opacity(0.5))
-        .cornerRadius(12)
-        .padding(.horizontal, 40)
+        .background(Color.black.opacity(0.3))
         .task {
             await viewModel.loadTrains()
         }
