@@ -153,7 +153,7 @@ struct DepartureBoardView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .layoutPriority(1)
                 }
-                .padding(.horizontal, 30)
+                .padding(.horizontal, 22) // 22px + 8px internal padding = 30px total alignment
 
                 // Footer
                 if !viewModel.isLoading {
