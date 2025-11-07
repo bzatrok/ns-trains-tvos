@@ -115,9 +115,8 @@ class TrainAnnotationView: MKAnnotationView {
         typeLabel.sizeToFit()
         typeLabel.frame.size.width = max(typeLabel.frame.size.width + 8, 30)
 
-        // Set number label (show last 4 digits of rit number)
-        let ritNumber = train.ritId.suffix(4)
-        numberLabel.text = String(ritNumber)
+        // Set number label (train number)
+        numberLabel.text = String(train.trainNumber)
         numberLabel.sizeToFit()
         numberLabel.frame.size.width = max(numberLabel.frame.size.width + 6, 30)
 

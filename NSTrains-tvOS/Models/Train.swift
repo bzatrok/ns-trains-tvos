@@ -4,6 +4,7 @@ import MapKit
 struct Train: Decodable, Identifiable {
     let id: String
     let ritId: String
+    let trainNumber: Int
     let latitude: Double
     let longitude: Double
     let speed: Double
@@ -21,18 +22,14 @@ struct Train: Decodable, Identifiable {
         "\(Int(speed)) km/h"
     }
 
-    // Get train type code (IC, SPR, etc.)
+    // Get train type code (type is already "IC", "SPR", etc.)
     var typeCode: String {
-        // Extract code from type string if it contains it
-        if type.contains("IC") { return "IC" }
-        if type.contains("SPR") { return "SPR" }
-        if type.contains("Intercity") { return "IC" }
-        if type.contains("Sprinter") { return "SPR" }
-        return type.prefix(3).uppercased()
+        type
     }
 
     enum CodingKeys: String, CodingKey {
         case ritId
+        case treinNummer
         case lat
         case lng
         case snelheid
@@ -45,7 +42,8 @@ struct Train: Decodable, Identifiable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         self.ritId = try container.decode(String.self, forKey: .ritId)
-        self.id = ritId
+        self.trainNumber = try container.decode(Int.self, forKey: .treinNummer)
+        self.id = "\(trainNumber)-\(ritId)" // Unique ID combining train number and rit
 
         self.latitude = try container.decode(Double.self, forKey: .lat)
         self.longitude = try container.decode(Double.self, forKey: .lng)
@@ -57,5 +55,9 @@ struct Train: Decodable, Identifiable {
 }
 
 struct TrainsResponse: Decodable {
+    let payload: TrainsPayload
+}
+
+struct TrainsPayload: Decodable {
     let treinen: [Train]
 }

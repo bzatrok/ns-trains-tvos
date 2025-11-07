@@ -107,8 +107,8 @@ class NSAPIService {
 
         do {
             let trainsResponse = try JSONDecoder().decode(TrainsResponse.self, from: data)
-            print("✅ Decoded \(trainsResponse.treinen.count) trains successfully")
-            return trainsResponse.treinen
+            print("✅ Decoded \(trainsResponse.payload.treinen.count) trains successfully")
+            return trainsResponse.payload.treinen
         } catch {
             print("❌ Decoding error: \(error)")
             throw NSAPIError.decodingError(error)

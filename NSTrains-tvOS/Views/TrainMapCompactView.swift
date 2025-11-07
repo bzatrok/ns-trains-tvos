@@ -89,8 +89,6 @@ struct MapViewContainer: UIViewRepresentable {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
         mapView.mapType = .standard
-        mapView.isRotateEnabled = false
-        mapView.isPitchEnabled = false
 
         // Register custom annotation view
         mapView.register(
@@ -181,7 +179,7 @@ class TrainAnnotation: NSObject, MKAnnotation {
     init(train: Train) {
         self.train = train
         self.coordinate = train.coordinate
-        self.title = "\(train.typeCode) \(train.ritId)"
+        self.title = "\(train.typeCode) \(train.trainNumber)"
         self.subtitle = "\(train.formattedSpeed)"
         super.init()
     }
