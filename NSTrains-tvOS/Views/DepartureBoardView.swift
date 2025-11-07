@@ -130,6 +130,7 @@ struct DepartureBoardView: View {
                             }
                             .font(.system(size: 24, weight: .bold))
                             .foregroundColor(.nsYellow)
+                            .padding(.horizontal, 8)
                             .padding(.vertical, 16)
                             .background(Color.white.opacity(0.1))
 
@@ -140,6 +141,7 @@ struct DepartureBoardView: View {
                                         DepartureRow(departure: departure)
                                     }
                                 }
+                                .padding(.horizontal, 8)
                             }
                         }
                     }
@@ -258,6 +260,7 @@ struct DepartureRow: View {
                 .foregroundColor(statusColor)
                 .frame(width: 140, alignment: .center)
         }
+        .padding(.horizontal, 8)
         .padding(.vertical, 12)
         .background(
             RoundedRectangle(cornerRadius: 8)
