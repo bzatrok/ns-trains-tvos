@@ -65,6 +65,31 @@ class NSAPIService {
         return departuresResponse.payload.departures
     }
 
+    // MARK: - Fetch Arrivals
+
+    func fetchArrivals(for stationCode: String, maxJourneys: Int = 20) async throws -> [Departure] {
+        guard let url = URL(string: "\(baseURL)/arrivals?station=\(stationCode)&maxJourneys=\(maxJourneys)") else {
+            throw NSAPIError.invalidURL
+        }
+
+        var request = URLRequest(url: url)
+        request.setValue(apiKey, forHTTPHeaderField: "Ocp-Apim-Subscription-Key")
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw NSAPIError.invalidResponse
+        }
+
+        guard httpResponse.statusCode == 200 else {
+            throw NSAPIError.httpError(statusCode: httpResponse.statusCode)
+        }
+
+        // Arrivals use the same response structure as departures
+        let arrivalsResponse = try JSONDecoder().decode(DeparturesResponse.self, from: data)
+        return arrivalsResponse.payload.departures
+    }
+
     // MARK: - Fetch Trains (Virtual Train API)
 
     func fetchTrains(latitude: Double, longitude: Double, radius: Int = 50, limit: Int = 50) async throws -> [Train] {

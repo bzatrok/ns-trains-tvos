@@ -3,6 +3,7 @@ import SwiftUI
 struct DepartureBoardView: View {
     let station: Station
     @StateObject private var viewModel: DepartureBoardViewModel
+    @State private var showingDepartures = true
     var onBack: (() -> Void)?
     var onChangeStation: (() -> Void)?
 
@@ -19,16 +20,44 @@ struct DepartureBoardView: View {
 
             VStack(spacing: 0) {
                 // Header
-                HStack {
+                HStack(alignment: .center) {
+                    // Back button (if provided)
                     if let onBack = onBack {
                         Button(action: onBack) {
-                            HStack(spacing: 12) {
-                                Image(systemName: "chevron.left")
-                                    .font(.system(size: 32, weight: .semibold))
-                                Text("BACK")
-                                    .font(.system(size: 32, weight: .semibold))
-                            }
-                            .foregroundColor(.nsYellow)
+                            Image(systemName: "chevron.left")
+                                .font(.system(size: 32, weight: .semibold))
+                                .foregroundColor(.nsYellow)
+                        }
+                        .buttonStyle(.plain)
+                    }
+
+                    // Departures/Arrivals Toggle
+                    HStack(spacing: 16) {
+                        Button(action: {
+                            showingDepartures = true
+                            viewModel.showingDepartures = true
+                        }) {
+                            Text("DEPARTURES")
+                                .font(.system(size: 28, weight: .semibold))
+                                .foregroundColor(showingDepartures ? .nsBlue : .nsYellow)
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 10)
+                                .background(showingDepartures ? Color.nsYellow : Color.clear)
+                                .cornerRadius(8)
+                        }
+                        .buttonStyle(.plain)
+
+                        Button(action: {
+                            showingDepartures = false
+                            viewModel.showingDepartures = false
+                        }) {
+                            Text("ARRIVALS")
+                                .font(.system(size: 28, weight: .semibold))
+                                .foregroundColor(!showingDepartures ? .nsBlue : .nsYellow)
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 10)
+                                .background(!showingDepartures ? Color.nsYellow : Color.clear)
+                                .cornerRadius(8)
                         }
                         .buttonStyle(.plain)
                     }
@@ -40,7 +69,7 @@ struct DepartureBoardView: View {
                             .font(.system(size: 48, weight: .bold))
                             .foregroundColor(.nsYellow)
 
-                        Text("DEPARTURES")
+                        Text(showingDepartures ? "DEPARTURES" : "ARRIVALS")
                             .font(.system(size: 32, weight: .semibold))
                             .foregroundColor(.white)
                     }
@@ -59,7 +88,7 @@ struct DepartureBoardView: View {
                     .buttonStyle(.plain)
                 }
                 .padding(.horizontal, 30)
-                .padding(.top, 60)
+                .padding(.top, 20)
                 .padding(.bottom, 20)
 
                 // Last update
@@ -100,7 +129,7 @@ struct DepartureBoardView: View {
                                 Image(systemName: "exclamationmark.triangle")
                                     .font(.system(size: 64))
                                     .foregroundColor(.nsYellow)
-                                Text("Error Loading Departures")
+                                Text("Error Loading \(showingDepartures ? "Departures" : "Arrivals")")
                                     .font(.system(size: 42, weight: .semibold))
                                     .foregroundColor(.white)
                                 Text(error)
@@ -119,7 +148,7 @@ struct DepartureBoardView: View {
                                     .frame(width: 100, alignment: .leading)
                                 Text("TYPE")
                                     .frame(width: 160, alignment: .leading)
-                                Text("DESTINATION")
+                                Text(showingDepartures ? "DESTINATION" : "ORIGIN")
                                     .frame(minWidth: 300, alignment: .leading)
                                 Text("PLATFORM")
                                     .frame(width: 140, alignment: .center)
@@ -146,11 +175,13 @@ struct DepartureBoardView: View {
                         }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .frame(idealWidth: 1000)
                     .layoutPriority(2)
 
                     // Right side: Train Map (1/3 width)
                     TrainMapCompactView(station: station)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .frame(width: 500)
+                        .frame(maxHeight: .infinity)
                         .layoutPriority(1)
                 }
                 .padding(.horizontal, 22) // 22px + 8px internal padding = 30px total alignment
@@ -158,7 +189,7 @@ struct DepartureBoardView: View {
                 // Footer
                 if !viewModel.isLoading {
                     HStack {
-                        Text("\(viewModel.departures.count) departures")
+                        Text("\(viewModel.departures.count) \(showingDepartures ? "departures" : "arrivals")")
                             .font(.system(size: 24))
                             .foregroundColor(.white.opacity(0.6))
 
@@ -169,12 +200,17 @@ struct DepartureBoardView: View {
                             .foregroundColor(.white.opacity(0.6))
                     }
                     .padding(.horizontal, 30)
-                    .padding(.vertical, 30)
+                    .padding(.vertical, 20)
                 }
             }
         }
         .task {
             await viewModel.loadDepartures()
+        }
+        .onChange(of: showingDepartures) { _, newValue in
+            Task {
+                await viewModel.loadJourneys(showingDepartures: newValue)
+            }
         }
     }
 }
@@ -263,7 +299,7 @@ struct DepartureRow: View {
         .padding(.horizontal, 8)
         .padding(.vertical, 12)
         .background(
-            RoundedRectangle(cornerRadius: 8)
+            RoundedRectangle(cornerRadius: 0)
                 .fill(Color.white.opacity(0.05))
         )
     }
@@ -278,6 +314,7 @@ class DepartureBoardViewModel: ObservableObject {
     @Published var isRefreshing = false
     @Published var errorMessage: String?
     @Published var lastUpdateTime = "--:--:--"
+    @Published var showingDepartures = true
 
     private var refreshTimer: Timer?
 
@@ -300,20 +337,47 @@ class DepartureBoardViewModel: ObservableObject {
         }
     }
 
+    func loadArrivals() async {
+        isLoading = true
+        errorMessage = nil
+
+        do {
+            departures = try await NSAPIService.shared.fetchArrivals(for: stationCode)
+            updateLastUpdateTime()
+            isLoading = false
+            startAutoRefresh()
+        } catch {
+            errorMessage = error.localizedDescription
+            isLoading = false
+        }
+    }
+
+    func loadJourneys(showingDepartures: Bool) async {
+        if showingDepartures {
+            await loadDepartures()
+        } else {
+            await loadArrivals()
+        }
+    }
+
     private func startAutoRefresh() {
         refreshTimer?.invalidate()
         refreshTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { [weak self] _ in
             Task { @MainActor in
-                await self?.refreshDepartures()
+                await self?.refreshJourneys()
             }
         }
     }
 
-    private func refreshDepartures() async {
+    private func refreshJourneys() async {
         isRefreshing = true
 
         do {
-            departures = try await NSAPIService.shared.fetchDepartures(for: stationCode)
+            if showingDepartures {
+                departures = try await NSAPIService.shared.fetchDepartures(for: stationCode)
+            } else {
+                departures = try await NSAPIService.shared.fetchArrivals(for: stationCode)
+            }
             updateLastUpdateTime()
         } catch {
             // Silent fail on refresh - keep showing old data

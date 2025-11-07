@@ -98,8 +98,8 @@ struct MapViewContainer: UIViewRepresentable {
         // Set initial region centered on station (50km radius)
         let region = MKCoordinateRegion(
             center: station.coordinate,
-            latitudinalMeters: 50000 * 2,  // 50km radius = 100km span
-            longitudinalMeters: 50000 * 2
+            latitudinalMeters: 3000 * 2,  // 3km radius = 6km span
+            longitudinalMeters: 3000 * 2
         )
         mapView.setRegion(region, animated: false)
 
