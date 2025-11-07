@@ -3,30 +3,36 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		41D0FD0DCAF1563DF349C5BB /* DepartureBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658AE71A75B58ABE93E4F488 /* DepartureBoardView.swift */; };
 		4E4A72FCA8E4B6E7F083A61D /* Departure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F83276CC0EF41A404424C05 /* Departure.swift */; };
+		4FC00764467275C7C2659A5C /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = F317061C8A76B8FDFEBAFC6B /* Train.swift */; };
 		53ADB5D623D517566C3E9EE0 /* StationSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779466EFF215F6209A59B79 /* StationSelectorView.swift */; };
 		5A8458F3636636A799409988 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415C28825F5C8C1D34AD277A /* WelcomeView.swift */; };
 		7CF0F01C56C201DDC0C4FE70 /* NSTrainsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5680CFD7CDB1724A90625A2F /* NSTrainsApp.swift */; };
+		9FF97032DD8527F4C957ECB6 /* TrainAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFF046A5C1828EAD0929115 /* TrainAnnotationView.swift */; };
+		B9FBA69E6A5DDFFF4A9340F8 /* TrainMapCompactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AAB0A1BE4AAD143CCD0E28 /* TrainMapCompactView.swift */; };
 		DE386B3D63D63CE1198EB4FA /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382DD4DE50F3855D1A1CF84 /* Station.swift */; };
 		EA1A665DF917D9974172BCC9 /* NSAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D07D3AE088069A63C04665E /* NSAPIService.swift */; };
 		FC39363994EF9016C92EAE0A /* NSColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15059287BFE82358E1BCA907 /* NSColors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01AAB0A1BE4AAD143CCD0E28 /* TrainMapCompactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainMapCompactView.swift; sourceTree = "<group>"; };
 		0D07D3AE088069A63C04665E /* NSAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAPIService.swift; sourceTree = "<group>"; };
 		15059287BFE82358E1BCA907 /* NSColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColors.swift; sourceTree = "<group>"; };
 		2A86CC111253D9E22542F138 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		415C28825F5C8C1D34AD277A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		5680CFD7CDB1724A90625A2F /* NSTrainsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTrainsApp.swift; sourceTree = "<group>"; };
 		658AE71A75B58ABE93E4F488 /* DepartureBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartureBoardView.swift; sourceTree = "<group>"; };
+		8DFF046A5C1828EAD0929115 /* TrainAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainAnnotationView.swift; sourceTree = "<group>"; };
 		9382DD4DE50F3855D1A1CF84 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		9F83276CC0EF41A404424C05 /* Departure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Departure.swift; sourceTree = "<group>"; };
-		AF2947024ADBBF0413D6B342 /* NSTrains-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NSTrains-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF2947024ADBBF0413D6B342 /* NSTrains-tvOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "NSTrains-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F317061C8A76B8FDFEBAFC6B /* Train.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Train.swift; sourceTree = "<group>"; };
 		F779466EFF215F6209A59B79 /* StationSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSelectorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,6 +66,7 @@
 			children = (
 				9F83276CC0EF41A404424C05 /* Departure.swift */,
 				9382DD4DE50F3855D1A1CF84 /* Station.swift */,
+				F317061C8A76B8FDFEBAFC6B /* Train.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -98,6 +105,8 @@
 			children = (
 				658AE71A75B58ABE93E4F488 /* DepartureBoardView.swift */,
 				F779466EFF215F6209A59B79 /* StationSelectorView.swift */,
+				8DFF046A5C1828EAD0929115 /* TrainAnnotationView.swift */,
+				01AAB0A1BE4AAD143CCD0E28 /* TrainMapCompactView.swift */,
 				415C28825F5C8C1D34AD277A /* WelcomeView.swift */,
 			);
 			path = Views;
@@ -131,6 +140,11 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					BE5F3BC2A92C7F65EF0EC9EC = {
+						DevelopmentTeam = "";
+					};
+				};
 			};
 			buildConfigurationList = DAFC422C61D377B2DBF6929B /* Build configuration list for PBXProject "NSTrains-tvOS" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -142,6 +156,7 @@
 			);
 			mainGroup = B4C5CF8B0CD4992D6837BDA6;
 			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -162,6 +177,9 @@
 				7CF0F01C56C201DDC0C4FE70 /* NSTrainsApp.swift in Sources */,
 				DE386B3D63D63CE1198EB4FA /* Station.swift in Sources */,
 				53ADB5D623D517566C3E9EE0 /* StationSelectorView.swift in Sources */,
+				4FC00764467275C7C2659A5C /* Train.swift in Sources */,
+				9FF97032DD8527F4C957ECB6 /* TrainAnnotationView.swift in Sources */,
+				B9FBA69E6A5DDFFF4A9340F8 /* TrainMapCompactView.swift in Sources */,
 				5A8458F3636636A799409988 /* WelcomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,16 +311,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BU44GWREFM;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "NSTrains-tvOS/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Departures;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amberglass.nstrains.tvos;
 				SDKROOT = appletvos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -316,16 +330,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BU44GWREFM;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "NSTrains-tvOS/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Departures;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amberglass.nstrains.tvos;
 				SDKROOT = appletvos;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";

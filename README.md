@@ -18,7 +18,11 @@ This is a **native Swift/SwiftUI tvOS application** - no React Native, no Expo, 
 - ✅ Platform change indicators
 - ✅ Delay information and status (on-time, delayed, cancelled)
 - ✅ Via stations display
-- 🚧 Train radar map (future enhancement)
+- ✅ Embedded train map showing nearby trains in real-time
+  - Shows trains within 50km of selected station
+  - Custom train icons with direction indicators
+  - Train type (IC, SPR) and journey number displayed
+  - Auto-refreshes every 30 seconds with departure data
 
 ## Requirements
 
