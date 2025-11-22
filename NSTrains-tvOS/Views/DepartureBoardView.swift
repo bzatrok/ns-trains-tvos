@@ -76,7 +76,7 @@ struct DepartureBoardView: View {
                     .buttonStyle(.plain)
                 }
                 .padding(.horizontal, 30)
-                .padding(.top, 20)
+                .padding(.top, 60)
                 .padding(.bottom, 20)
 
                 // Last update
@@ -105,14 +105,8 @@ struct DepartureBoardView: View {
                 HStack(spacing: 10) {
                     // Left side: Departures list (2/3 width)
                     VStack(spacing: 0) {
-                        if viewModel.isLoading {
-                            Spacer()
-                            ProgressView()
-                                .scaleEffect(2)
-                                .tint(.nsYellow)
-                            Spacer()
-                        } else if let error = viewModel.errorMessage {
-                            Spacer()
+                        if let error = viewModel.errorMessage {
+                            // Error state
                             VStack(spacing: 20) {
                                 Image(systemName: "exclamationmark.triangle")
                                     .font(.system(size: 64))
@@ -126,10 +120,10 @@ struct DepartureBoardView: View {
                                     .multilineTextAlignment(.center)
                             }
                             .padding(60)
-                            Spacer()
                         } else {
-                            // Table header
-                            HStack(spacing: 20) {
+                            VStack(spacing: 0) {
+                                // Table header (single instance, always present)
+                                HStack(spacing: 20) {
                                 Text("TIME")
                                     .frame(width: 120, alignment: .leading)
                                 Text("TRAIN")
@@ -147,37 +141,48 @@ struct DepartureBoardView: View {
                             }
                             .font(.system(size: 24, weight: .bold))
                             .foregroundColor(.nsYellow)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 16)
+                            .padding(.horizontal, 16)
                             .background(Color.white.opacity(0.1))
+                            .frame(height: 56)
 
-                            // Departures
-                            ScrollView {
-                                VStack(spacing: 2) {
-                                    ForEach(viewModel.departures) { departure in
-                                        DepartureRow(departure: departure)
+                            // Row container - Fixed height to prevent layout shifts
+                            VStack(spacing: 2) {
+                                ForEach(0..<7, id: \.self) { index in
+                                    if viewModel.isLoading {
+                                        DepartureSkeletonRow()
+                                            .id("row-\(index)")
+                                    } else if index < viewModel.departures.count {
+                                        DepartureRow(departure: viewModel.departures[index])
+                                            .id("row-\(index)")
+                                    } else {
+                                        Color.clear
+                                            .frame(height: 68)
+                                            .id("row-\(index)")
                                     }
                                 }
-                                .padding(.horizontal, 8)
+                            }
+                            .frame(height: 476)
+                            .padding(.horizontal, 16)
+                            .animation(.easeInOut(duration: 0.4), value: viewModel.isLoading)
                             }
                         }
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .frame(idealWidth: 1000)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 532)
                     .layoutPriority(2)
 
                     // Right side: Train Map (1/3 width)
                     TrainMapCompactView(station: station)
                         .frame(width: 500)
-                        .frame(maxHeight: .infinity)
+                        .frame(height: 532)
                         .layoutPriority(1)
                 }
-                .padding(.horizontal, 22) // 22px + 8px internal padding = 30px total alignment
+                .padding(.horizontal, 14) // 14px + 16px internal = 30px total alignment
 
-                // Footer
+                // Footer - Only shown when not loading
                 if !viewModel.isLoading {
                     HStack {
-                        Text("\(viewModel.departures.count) \(showingDepartures ? "departures" : "arrivals")")
+                        Text("Showing \(min(7, viewModel.departures.count)) of \(viewModel.departures.count) \(showingDepartures ? "departures" : "arrivals")")
                             .font(.system(size: 24))
                             .foregroundColor(.white.opacity(0.6))
 
@@ -188,7 +193,7 @@ struct DepartureBoardView: View {
                             .foregroundColor(.white.opacity(0.6))
                     }
                     .padding(.horizontal, 30)
-                    .padding(.vertical, 20)
+                    .padding(.vertical, 30)
                 }
             }
         }
@@ -284,8 +289,8 @@ struct DepartureRow: View {
                 .foregroundColor(statusColor)
                 .frame(width: 140, alignment: .center)
         }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 12)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 22)
         .background(
             RoundedRectangle(cornerRadius: 0)
                 .fill(Color.white.opacity(0.05))
@@ -305,6 +310,7 @@ class DepartureBoardViewModel: ObservableObject {
     @Published var showingDepartures = true
 
     private var refreshTimer: Timer?
+    private var loadingStartTime: Date?
 
     init(stationCode: String) {
         self.stationCode = stationCode
@@ -313,14 +319,17 @@ class DepartureBoardViewModel: ObservableObject {
     func loadDepartures() async {
         isLoading = true
         errorMessage = nil
+        loadingStartTime = Date()
 
         do {
             departures = try await NSAPIService.shared.fetchDepartures(for: stationCode)
             updateLastUpdateTime()
+            await enforceMinimumLoadingTime()
             isLoading = false
             startAutoRefresh()
         } catch {
             errorMessage = error.localizedDescription
+            await enforceMinimumLoadingTime()
             isLoading = false
         }
     }
@@ -328,14 +337,17 @@ class DepartureBoardViewModel: ObservableObject {
     func loadArrivals() async {
         isLoading = true
         errorMessage = nil
+        loadingStartTime = Date()
 
         do {
             departures = try await NSAPIService.shared.fetchArrivals(for: stationCode)
             updateLastUpdateTime()
+            await enforceMinimumLoadingTime()
             isLoading = false
             startAutoRefresh()
         } catch {
             errorMessage = error.localizedDescription
+            await enforceMinimumLoadingTime()
             isLoading = false
         }
     }
@@ -379,6 +391,18 @@ class DepartureBoardViewModel: ObservableObject {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm:ss"
         lastUpdateTime = formatter.string(from: Date())
+    }
+
+    private func enforceMinimumLoadingTime() async {
+        guard let startTime = loadingStartTime else { return }
+
+        let elapsed = Date().timeIntervalSince(startTime)
+        let minimumDuration: TimeInterval = 1.5 // 1500ms
+
+        if elapsed < minimumDuration {
+            let remainingTime = minimumDuration - elapsed
+            try? await Task.sleep(nanoseconds: UInt64(remainingTime * 1_000_000_000))
+        }
     }
 
     deinit {

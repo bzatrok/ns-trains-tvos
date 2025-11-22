@@ -24,10 +24,6 @@ struct TrainMapCompactView: View {
                     ProgressView()
                         .scaleEffect(0.8)
                         .tint(.nsYellow)
-                } else {
-                    Text(viewModel.trainCount)
-                        .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(.white)
                 }
             }
             .padding(.horizontal, 20)

@@ -18,6 +18,7 @@
 		DE386B3D63D63CE1198EB4FA /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382DD4DE50F3855D1A1CF84 /* Station.swift */; };
 		EA1A665DF917D9974172BCC9 /* NSAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D07D3AE088069A63C04665E /* NSAPIService.swift */; };
 		FC39363994EF9016C92EAE0A /* NSColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15059287BFE82358E1BCA907 /* NSColors.swift */; };
+		4D767359D31BA5654965494F /* DepartureSkeletonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F398430B758349A04F26C3C /* DepartureSkeletonRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		AF2947024ADBBF0413D6B342 /* NSTrains-tvOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "NSTrains-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F317061C8A76B8FDFEBAFC6B /* Train.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Train.swift; sourceTree = "<group>"; };
 		F779466EFF215F6209A59B79 /* StationSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSelectorView.swift; sourceTree = "<group>"; };
+		2F398430B758349A04F26C3C /* DepartureSkeletonRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartureSkeletonRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				658AE71A75B58ABE93E4F488 /* DepartureBoardView.swift */,
+				2F398430B758349A04F26C3C /* DepartureSkeletonRow.swift */,
 				F779466EFF215F6209A59B79 /* StationSelectorView.swift */,
 				8DFF046A5C1828EAD0929115 /* TrainAnnotationView.swift */,
 				01AAB0A1BE4AAD143CCD0E28 /* TrainMapCompactView.swift */,
@@ -172,6 +175,7 @@
 			files = (
 				4E4A72FCA8E4B6E7F083A61D /* Departure.swift in Sources */,
 				41D0FD0DCAF1563DF349C5BB /* DepartureBoardView.swift in Sources */,
+				4D767359D31BA5654965494F /* DepartureSkeletonRow.swift in Sources */,
 				EA1A665DF917D9974172BCC9 /* NSAPIService.swift in Sources */,
 				FC39363994EF9016C92EAE0A /* NSColors.swift in Sources */,
 				7CF0F01C56C201DDC0C4FE70 /* NSTrainsApp.swift in Sources */,
