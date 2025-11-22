@@ -50,6 +50,13 @@
             ReferencedContainer = "container:NSTrains-tvOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "NS_API_KEY"
+            value = "b0144b30b45245dca4d4e8a8b484aba8"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
