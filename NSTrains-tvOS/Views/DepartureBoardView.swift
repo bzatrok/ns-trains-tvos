@@ -30,7 +30,7 @@ struct DepartureBoardView: View {
                                 .font(.system(size: 28, weight: .semibold))
                                 .foregroundColor(showingDepartures ? .nsBlue : .nsYellow)
                                 .padding(.horizontal, 16)
-                                .padding(.vertical, 10)
+                                .padding(.vertical, 16)
                         }
                         .background(showingDepartures ? Color.nsYellow : Color.clear)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
