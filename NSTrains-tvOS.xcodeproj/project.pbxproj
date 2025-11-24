@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1800FA7DD50991500BBC1A37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72757F1E48DF5F5E27D4BEAF /* Assets.xcassets */; };
 		41D0FD0DCAF1563DF349C5BB /* DepartureBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658AE71A75B58ABE93E4F488 /* DepartureBoardView.swift */; };
 		4E4A72FCA8E4B6E7F083A61D /* Departure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F83276CC0EF41A404424C05 /* Departure.swift */; };
 		53ADB5D623D517566C3E9EE0 /* StationSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779466EFF215F6209A59B79 /* StationSelectorView.swift */; };
@@ -24,9 +25,10 @@
 		415C28825F5C8C1D34AD277A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		5680CFD7CDB1724A90625A2F /* NSTrainsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTrainsApp.swift; sourceTree = "<group>"; };
 		658AE71A75B58ABE93E4F488 /* DepartureBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartureBoardView.swift; sourceTree = "<group>"; };
+		72757F1E48DF5F5E27D4BEAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9382DD4DE50F3855D1A1CF84 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		9F83276CC0EF41A404424C05 /* Departure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Departure.swift; sourceTree = "<group>"; };
-		AF2947024ADBBF0413D6B342 /* NSTrains-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NSTrains-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF2947024ADBBF0413D6B342 /* NSTrains-tvOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "NSTrains-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F779466EFF215F6209A59B79 /* StationSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSelectorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,6 +77,7 @@
 		AD05B2176CFA314A9175AD2C /* NSTrains-tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				72757F1E48DF5F5E27D4BEAF /* Assets.xcassets */,
 				2A86CC111253D9E22542F138 /* Info.plist */,
 				1B8103609DE7E2013FD5753E /* App */,
 				880D83346C4A197EB522DCEC /* Models */,
@@ -111,6 +114,7 @@
 			buildConfigurationList = 097CF32C9C16406E46915D79 /* Build configuration list for PBXNativeTarget "NSTrains-tvOS" */;
 			buildPhases = (
 				0EA876D26FDD3E30B48E38D8 /* Sources */,
+				3BAC43924E3E0E23B3A5E873 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -131,6 +135,11 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					BE5F3BC2A92C7F65EF0EC9EC = {
+						DevelopmentTeam = "";
+					};
+				};
 			};
 			buildConfigurationList = DAFC422C61D377B2DBF6929B /* Build configuration list for PBXProject "NSTrains-tvOS" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -142,6 +151,7 @@
 			);
 			mainGroup = B4C5CF8B0CD4992D6837BDA6;
 			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -149,6 +159,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3BAC43924E3E0E23B3A5E873 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1800FA7DD50991500BBC1A37 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0EA876D26FDD3E30B48E38D8 /* Sources */ = {
@@ -293,16 +314,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BU44GWREFM;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "NSTrains-tvOS/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Departures;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amberglass.nstrains.tvos;
 				SDKROOT = appletvos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -316,16 +333,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BU44GWREFM;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "NSTrains-tvOS/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Departures;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amberglass.nstrains.tvos;
 				SDKROOT = appletvos;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
